@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Daily Journal</title>
+</head>
+
+<body>
+	<h1>Hello :)</h1>
+
+	<table>
+		<tr>
+		    <th>Date</th>
+		    <th>Description</th>
+		    <th>Note</th>
+		    <th>Mood</th>
+		</tr>  
+    	<tr th:each = "journal : ${journals}">
+    		<td th:text="${journal.date}"></td>
+    		<td th:text="${journal.description}"></td>
+    		<td th:text="${journal.note}"></td>
+    		<td th:text="${journal.mood.name}"></td> 		
+ 			<td><a th:href="@{/edit/{id}(id=${journal.id})}">Edit</a></td>    		
+ 			<td><a th:href="@{/delete/{id}(id=${journal.id})}">Delete</a></td>    		
+    	</tr>
+     </table>
+	 <a href="/add">New Journal</a> 
+
+	
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Daily Journal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Edit Journal</h1>
+	<div>
+		
+		<form th:object="${journal}" th:action="@{'/edit/' + ${journal.id}}" action="#" method="post">
+
+		  	<label for="date">Date</label>
+			<input type="text" id="date" th:field="*{date}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="description">Description</label>
+			<input type="text" id="description" th:field="*{description}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+		  	<label for="note">Note</label>
+			<input type="text" th:field="*{note}" />
+
+			<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="mood">Mood</label>
+			 <select id="mood" th:field="*{mood}" class="form-control">
+       			<option th:each="mood: ${moods}" th:value="${mood.moodId}" th:text="${mood.name}"></option>
+    		</select>
+			
+			<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" value="Save"></input>
+		</form>
+	</div>
+</body>
+</html>
