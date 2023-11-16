@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.example.DailyJournal.domain.AppUser;
+import com.example.DailyJournal.domain.AppUserRepository;
 import com.example.DailyJournal.domain.Journal;
 import com.example.DailyJournal.domain.JournalRepository;
 import com.example.DailyJournal.domain.Mood;
@@ -22,7 +24,7 @@ public class DailyJournalApplication {
 	}
 
 	@Bean
-	public CommandLineRunner journalDemo(JournalRepository repository, MoodRepository mrepository) {
+	public CommandLineRunner journalDemo(JournalRepository repository, MoodRepository mrepository, AppUserRepository urepository) {
 		return (args) -> {
 			log.info("save a couple of journals");
 
@@ -38,6 +40,12 @@ public class DailyJournalApplication {
 					mrepository.findByName("Happy").get(0)));
 			repository.save(new Journal("Feb 14", "Today is valentines.", "I am wearing red.",
 					mrepository.findByName("Excited").get(0)));
+			
+			AppUser user1 = new AppUser("user", "$2a$10$YM0ZZtUtkdGVbaVw/NgxtOIjSawkWmxkLzYgt.Mv2vNLrfr9GZBFe", "user@gmail.com", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$FMVXp4WgAdUyS.2P2DdK/OYSRUvvK5CucWKCdAdfO5XxLu6pH7VCK", "admin@gmail.com", "ADMIN");
+			
+			urepository.save(user1);
+			urepository.save(user2);
 
 			log.info("fetch all journals");
 			for (Journal journal : repository.findAll()) {

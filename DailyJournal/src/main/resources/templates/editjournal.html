@@ -22,7 +22,7 @@
 			<div style="clear: both; display: block; height: 10px;"></div>						
 		  	<label for="mood">Mood</label>
 			 <select id="mood" th:field="*{mood}" class="form-control">
-       			<option th:each="mood: ${moods}" th:value="${mood.moodId}" th:text="${mood.name}"></option>
+       			<option th:each="mood: ${mood}" th:value="${mood.moodId}" th:text="${mood.name}"></option>
     		</select>
 			
 			<div style="clear: both; display: block; height: 10px;"></div>

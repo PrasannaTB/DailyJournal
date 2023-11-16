@@ -1,36 +1,53 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Daily Journal</title>
+	<title>My Daily Journal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 </head>
 
 <body>
-	<h1>Hello :)</h1>
+	<div class="container">
+		<div class="col-md-4">
+			<h1>Hello :)</h1>
+		</div>
 
-	<table>
-		<tr>
-		    <th>Date</th>
-		    <th>Description</th>
-		    <th>Note</th>
-		    <th>Mood</th>
-		</tr>  
-    	<tr th:each = "journal : ${journals}">
-    		<td th:text="${journal.date}"></td>
-    		<td th:text="${journal.description}"></td>
-    		<td th:text="${journal.note}"></td>
-    		<td th:text="${journal.mood.name}"></td> 		
- 			<td><a th:href="@{/edit/{id}(id=${journal.id})}">Edit</a></td>    		
- 			<td><a th:href="@{/delete/{id}(id=${journal.id})}">Delete</a></td>    		
-    	</tr>
-     </table>
-	 <a href="/add">New Journal</a> 
+		<div class="col-md-4">
+			<span sec:authentication="name" style="text-transform: uppercase; font-size: 20px;">Name</span>
+		</div>
 
-	
+		<div class="col-md-4" style="padding:20px 0">
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
+			</form>
+		</div>
 
+		<table class="table table-striped">
+			<tr>
+				<th>Date</th>
+				<th>Description</th>
+				<th>Note</th>
+				<th>Mood</th>
+				<th sec:authorize="hasAuthority('ADMIN')"> </th>
+			</tr>
 
+			<tbody>
+				<tr th:each="book : ${books}">
+				<tr th:each="journal : ${journals}">
+					<td th:text="${journal.date}"></td>
+					<td th:text="${journal.description}"></td>
+					<td th:text="${journal.note}"></td>
+					<td th:text="${journal.mood.name}"></td>
+					
+				<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${journal.id})}"
+						class="btn btn-xs btn-danger">Delete</a></td>
+				<td><a th:href="@{/edit(id=${journal.id})}"
+						class="btn btn-xs btn-danger">Edit</a></td>
 
+				</tr>
+			</tbody>
+		</table>
+		<a href="/add" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">New Journal</a>
+	</div>
 </body>
-
-</html>
