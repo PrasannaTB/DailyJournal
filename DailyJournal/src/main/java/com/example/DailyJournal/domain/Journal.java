@@ -1,5 +1,9 @@
 package com.example.DailyJournal.domain;
 
+import java.time.LocalDate;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,34 +16,29 @@ public class Journal {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
+
 	private Long id;
-	private String date;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
 	private String description;
 	private String note;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "mood")
 	private Mood mood;
 
 	public Journal() {
 		super();
-		
+
 	}
 
-	public Journal(String date, String description, String note, Mood mood) {
+	public Journal(LocalDate date, String description, String note, Mood mood) {
 		super();
 		this.date = date;
 		this.description = description;
 		this.note = note;
 		this.mood = mood;
 	}
-
-	public String getDate() {
-		return date;
-	}
-	
-	
 
 	public Long getId() {
 		return id;
@@ -49,7 +48,11 @@ public class Journal {
 		this.id = id;
 	}
 
-	public void setDate(String date) {
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -76,11 +79,5 @@ public class Journal {
 	public void setMood(Mood mood) {
 		this.mood = mood;
 	}
-	
-	
-	
-	
-	
-	
-	
+
 }

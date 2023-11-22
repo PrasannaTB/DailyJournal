@@ -11,7 +11,7 @@
 <body>
 	<div class="container">
 		<div class="col-md-4">
-			<h3>Welcome to my Journal ❤️✌️</h3>
+			<h1>Hello :)</h1>
 		</div>
 
 		<div class="col-md-4">
@@ -23,39 +23,33 @@
 				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
 			</form>
 		</div>
-		
-		<div class="row justify-content-end">
-            <div class="col-md-3 form-group">
-                <label for="filter">Filter:</label>
-                <input type="text" class="form-control" id="filter" placeholder="Enter text to filter">
-            </div>
-        </div>
 
-		 
+		<div class="form-group">
+			<label for="filter">Filter:</label>
+			<input type="text" class="form-control" id="filter" placeholder="Enter text to filter">
+		</div>
+
 		<table class="table table-striped" id="journalTable">
-			<thead>
-				<tr>
-					<th>Date</th>
-					<th>Content</th>
-					<th>Note</th>
-					<th>Mood</th>
-					<th sec:authorize="hasAuthority('ADMIN')"> </th>
-				</tr>
-			</thead>
+			<tr>
+				<th>Date</th>
+				<th>Content</th>
+				<th>Note</th>
+				<th>Mood</th>
+				<th sec:authorize="hasAuthority('ADMIN')"> </th>
+			</tr>
 
 			<tbody>
-				<tr th:each="journal : ${journals}" class="journal-row">
+				<tr th:each="book : ${books}">
+				<tr th:each="journal : ${journals}">
 					<td th:text="${journal.date}"></td>
 					<td th:text="${journal.description}"></td>
 					<td th:text="${journal.note}"></td>
 					<td th:text="${journal.mood.name}"></td>
 
-					<td sec:authorize="hasAuthority('ADMIN')">
-						<a th:href="@{/delete/{id}(id=${journal.id})}" class="btn btn-xs btn-danger">Delete</a>
-					</td>
-					<td>
-						<a th:href="@{/edit(id=${journal.id})}" class="btn btn-xs btn-danger">Edit</a>
-					</td>
+					<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${journal.id})}"
+							class="btn btn-xs btn-danger">Delete</a></td>
+					<td><a th:href="@{/edit(id=${journal.id})}" class="btn btn-xs btn-danger">Edit</a></td>
+
 				</tr>
 			</tbody>
 		</table>
@@ -101,7 +95,7 @@
 
 			$("#filter").on("input", function () {
 				var filterText = $(this).val().toLowerCase();
-				$(".journal-row").each(function () {
+				$("tbody tr").each(function () {
 					var rowText = $(this).text().toLowerCase();
 					$(this).toggle(rowText.includes(filterText));
 				});
@@ -109,5 +103,3 @@
 		});
 	</script>
 </body>
-
-</html>

@@ -9,7 +9,7 @@
 	<div>
 		<form th:object="${journal}" th:action="@{save}" action="#" method="post">
 		  	<label for="date">Date</label>
-			<input type="text" id="date" th:field="*{date}" />
+			<input type="date" id="date" th:field="*{date}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 		  	<label for="description">Description</label>
 			<input type="text" id="description" th:field="*{description}" />

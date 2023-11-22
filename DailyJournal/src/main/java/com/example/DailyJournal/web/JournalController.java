@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.DailyJournal.domain.*;
-
-
 
 @Controller
 public class JournalController {
@@ -33,6 +30,8 @@ public class JournalController {
 	}
 
 	// Show all journals
+	
+	
 	@RequestMapping(value = { "/", "/diary" })
 	public String DiaryJournal(Model model) {
 
@@ -72,20 +71,25 @@ public class JournalController {
 	}
 
 	// Save new journals
-	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(Journal journal) {
+	@PostMapping("/save")
+	public String save(@ModelAttribute Journal journal) {
 		repository.save(journal);
 		return "redirect:diary";
 	}
-	
-	
+
+	/*
+	 * 
+	 * @RequestMapping(value = "/save", method = RequestMethod.POST) public String
+	 * save(Journal journal) { repository.save(journal); return "redirect:diary"; }
+	 */
+
 	@RequestMapping(value = "/edit")
 	public String editJournal(Long id, Model model) {
 		Journal journal = repository.findById(id).orElse(null);
 		if (journal != null) {
 			model.addAttribute("journal", journal);
 			model.addAttribute("mood", mrepository.findAll());
-			
+
 			return "editjournal";
 		} else {
 			// Handle the case where the book with the given ID doesn't exist
@@ -103,27 +107,21 @@ public class JournalController {
 
 	// Edit journals
 	/*
-	@RequestMapping(value = "/edit/{id}")
-	public String editJournal(@PathVariable("id") Long journalId, Model model) {
-		Journal journal = repository.findById(journalId).orElse(null);
-		if (journal != null) {
-			model.addAttribute("journal", journal);
-			model.addAttribute("mood", mrepository.findAll());
-
-			return "editjournal";
-		} else {
-			// Handle the case where the book with the given ID doesn't exist
-			return "redirect:/diary";
-		}
-	}
-
-	// Save edited journals
-	@PostMapping("/edit/{id}")
-	public String editJournalSubmit(@PathVariable("id") Long journalId, @ModelAttribute Journal editedJournal) {
-		editedJournal.setId(journalId);
-		repository.save(editedJournal);
-		return "redirect:/diary";
-	}
-	*/
+	 * @RequestMapping(value = "/edit/{id}") public String
+	 * editJournal(@PathVariable("id") Long journalId, Model model) { Journal
+	 * journal = repository.findById(journalId).orElse(null); if (journal != null) {
+	 * model.addAttribute("journal", journal); model.addAttribute("mood",
+	 * mrepository.findAll());
+	 * 
+	 * return "editjournal"; } else { // Handle the case where the book with the
+	 * given ID doesn't exist return "redirect:/diary"; } }
+	 * 
+	 * // Save edited journals
+	 * 
+	 * @PostMapping("/edit/{id}") public String
+	 * editJournalSubmit(@PathVariable("id") Long journalId, @ModelAttribute Journal
+	 * editedJournal) { editedJournal.setId(journalId);
+	 * repository.save(editedJournal); return "redirect:/diary"; }
+	 */
 
 }
