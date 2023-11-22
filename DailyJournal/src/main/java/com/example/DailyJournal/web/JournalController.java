@@ -105,23 +105,5 @@ public class JournalController {
 		return "redirect:/diary";
 	}
 
-	// Edit journals
-	/*
-	 * @RequestMapping(value = "/edit/{id}") public String
-	 * editJournal(@PathVariable("id") Long journalId, Model model) { Journal
-	 * journal = repository.findById(journalId).orElse(null); if (journal != null) {
-	 * model.addAttribute("journal", journal); model.addAttribute("mood",
-	 * mrepository.findAll());
-	 * 
-	 * return "editjournal"; } else { // Handle the case where the book with the
-	 * given ID doesn't exist return "redirect:/diary"; } }
-	 * 
-	 * // Save edited journals
-	 * 
-	 * @PostMapping("/edit/{id}") public String
-	 * editJournalSubmit(@PathVariable("id") Long journalId, @ModelAttribute Journal
-	 * editedJournal) { editedJournal.setId(journalId);
-	 * repository.save(editedJournal); return "redirect:/diary"; }
-	 */
 
 }

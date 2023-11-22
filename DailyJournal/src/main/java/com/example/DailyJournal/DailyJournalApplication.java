@@ -16,7 +16,6 @@ import com.example.DailyJournal.domain.JournalRepository;
 import com.example.DailyJournal.domain.Mood;
 import com.example.DailyJournal.domain.MoodRepository;
 
-
 @SpringBootApplication
 public class DailyJournalApplication {
 	private static final Logger log = LoggerFactory.getLogger(DailyJournalApplication.class);
@@ -26,7 +25,8 @@ public class DailyJournalApplication {
 	}
 
 	@Bean
-	public CommandLineRunner journalDemo(JournalRepository repository, MoodRepository mrepository, AppUserRepository urepository) {
+	public CommandLineRunner journalDemo(JournalRepository repository, MoodRepository mrepository,
+			AppUserRepository urepository) {
 		return (args) -> {
 			log.info("save a couple of journals");
 
@@ -42,10 +42,11 @@ public class DailyJournalApplication {
 					mrepository.findByName("Happy 😊").get(0)));
 			repository.save(new Journal(LocalDate.of(2023, 12, 15), "Today is valentines.", "I am wearing red.",
 					mrepository.findByName("Angry 👿").get(0)));
-			
-			AppUser user1 = new AppUser("user", "$2a$10$YM0ZZtUtkdGVbaVw/NgxtOIjSawkWmxkLzYgt.Mv2vNLrfr9GZBFe", "user@gmail.com", "USER");
-			AppUser user2 = new AppUser("admin", "$2a$10$FMVXp4WgAdUyS.2P2DdK/OYSRUvvK5CucWKCdAdfO5XxLu6pH7VCK", "admin@gmail.com", "ADMIN");
-			
+
+			AppUser user1 = new AppUser("user", "$2a$10$YM0ZZtUtkdGVbaVw/NgxtOIjSawkWmxkLzYgt.Mv2vNLrfr9GZBFe", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$FMVXp4WgAdUyS.2P2DdK/OYSRUvvK5CucWKCdAdfO5XxLu6pH7VCK",
+					"ADMIN");
+
 			urepository.save(user1);
 			urepository.save(user2);
 

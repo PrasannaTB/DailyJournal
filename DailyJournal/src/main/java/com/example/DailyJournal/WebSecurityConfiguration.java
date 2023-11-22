@@ -26,6 +26,8 @@ public class WebSecurityConfiguration {
 		http.
 		authorizeHttpRequests(authorize -> authorize
 				.requestMatchers(antMatcher("/css/**")).permitAll()
+				.requestMatchers(antMatcher("/signup")).permitAll()
+				.requestMatchers(antMatcher("/saveuser")).permitAll()
 				.anyRequest().authenticated()
 		)
 		.headers(headers -> headers
