@@ -23,15 +23,15 @@
 				<input type="submit" value="Sign Out" class="btn btn-sm btn-danger" />
 			</form>
 		</div>
-		
-		<div class="row justify-content-end">
-            <div class="col-md-3 form-group">
-                <label for="filter">Filter:</label>
-                <input type="text" class="form-control" id="filter" placeholder="Enter text to filter">
-            </div>
-        </div>
 
-		 
+		<div class="row justify-content-end">
+			<div class="col-md-3 form-group">
+				<label for="filter">Filter:</label>
+				<input type="text" class="form-control" id="filter" placeholder="Enter text to filter">
+			</div>
+		</div>
+
+
 		<table class="table table-striped" id="journalTable">
 			<thead>
 				<tr>
@@ -62,52 +62,7 @@
 		<a href="/add" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">New Journal</a>
 	</div>
 
-	<script th:inline="javascript">
-		$(document).ready(function () {
-			function sortTable() {
-				var table, rows, switching, i, x, y, shouldSwitch;
-				table = $("#journalTable")[0];
-				switching = true;
 
-				while (switching) {
-					switching = false;
-					rows = table.rows;
-
-					for (i = 1; i < rows.length - 1; i++) {
-						shouldSwitch = false;
-
-						x = rows[i].cells[0]; // Assuming the date is in the first column
-						y = rows[i + 1].cells[0];
-
-						// Convert date strings to Date objects for proper comparison
-						var dateX = new Date(x.innerText);
-						var dateY = new Date(y.innerText);
-
-						if (dateX < dateY) {
-							shouldSwitch = true;
-							break;
-						}
-					}
-
-					if (shouldSwitch) {
-						rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-						switching = true;
-					}
-				}
-			}
-
-			// Call the sortTable function when the page is loaded
-			sortTable();
-
-			$("#filter").on("input", function () {
-				var filterText = $(this).val().toLowerCase();
-				$(".journal-row").each(function () {
-					var rowText = $(this).text().toLowerCase();
-					$(this).toggle(rowText.includes(filterText));
-				});
-			});
-		});
-	</script>
 </body>
 
 </html>

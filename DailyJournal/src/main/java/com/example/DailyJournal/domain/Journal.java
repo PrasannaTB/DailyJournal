@@ -10,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OrderBy;
 
 @Entity
 public class Journal {
@@ -25,6 +26,7 @@ public class Journal {
 
 	@ManyToOne
 	@JoinColumn(name = "mood")
+	@OrderBy("date ASC")
 	private Mood mood;
 
 	public Journal() {

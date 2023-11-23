@@ -30,12 +30,11 @@ public class JournalController {
 	}
 
 	// Show all journals
-	
-	
 	@RequestMapping(value = { "/", "/diary" })
 	public String DiaryJournal(Model model) {
-
-		model.addAttribute("journals", repository.findAll());
+		List<Journal> sortedJournals = repository.findAllByOrderByDateDesc();
+		//model.addAttribute("journals", repository.findAll());
+		model.addAttribute("journals", sortedJournals);
 
 		return "diary";
 	}
@@ -43,7 +42,7 @@ public class JournalController {
 	// RESTful service to get all journals
 	@RequestMapping(value = "/journals", method = RequestMethod.GET)
 	public @ResponseBody List<Journal> journalRest() {
-		return (List<Journal>) repository.findAll();
+		return (List<Journal>) repository.findAllByOrderByDateDesc();
 	}
 
 	// RESTful service to get journals by id
