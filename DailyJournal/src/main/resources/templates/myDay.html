@@ -8,16 +8,31 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 	<style>
+		:root {
+			--bg-color-light: #f8f9fa;
+			--text-color-light: #000000;
+
+			--bg-color-dark: #1e1e1e;
+			--text-color-dark: rgb(255, 255, 255);
+		}
+
 		body {
 			background-color: #f8f9fa;
+			color: var(--text-color);
+			transition: background-color 0.3s, color 0.3s;
+		}
+
+		.dark-mode {
+			background-color: var(--bg-color-dark) !important;
+			color: var(--text-color-dark) !important;
 		}
 
 		.container {
-			margin-top: 10px;
+			margin-top: 7px;
 			margin-left: 5%;
 			margin-right: 5%;
-			background-color: rgb(255, 223, 239); 
-            padding: 30px; 
+			padding: 20px;
+			border: 4px solid #FFA500;
 		}
 
 
@@ -34,8 +49,18 @@
 			padding: 10px 20px;
 		}
 
+		.btn-mode {
+			background-color: rgb(94, 94, 94);
+			color: #ffffff;
+			font-size: 1em;
+			padding: 8px 15px;
+			position: fixed;
+			top: 20px;
+			right: 100px;
+		}
+
 		.space {
-			height: 60px;
+			height: 55px;
 		}
 
 		.center-text {
@@ -54,6 +79,7 @@
 
 		.date-section {
 			background-color: #ffcccb;
+			color: var(--text-color);
 		}
 
 		.content-section {
@@ -74,7 +100,7 @@
 	<div class="container">
 		<div class="row center-text">
 			<div class="col-md-6 mx-auto text-center mb-4">
-				<h1 class="display-4">All About Today ❤️✌️</h1>
+				<h1 class="display-4">All About Today 💫❤️✌️</h1>
 			</div>
 		</div>
 
@@ -112,9 +138,16 @@
 			</form>
 		</div>
 
-
+		<button class="btn-mode" onclick="toggleDarkMode()">Mode Change</button>
 
 	</div>
+
+	<script>
+		function toggleDarkMode() {
+			const body = document.body;
+			body.classList.toggle('dark-mode');
+		}
+	</script>
 
 
 </body>
