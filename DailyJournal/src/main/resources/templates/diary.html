@@ -6,6 +6,21 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<style>
+		.custom-table {
+			background-color: rgb(255, 128, 64);
+		}
+
+		.custom-table tr:nth-child(even) {
+			background-color: rgb(252, 218, 205);
+
+		}
+
+		.custom-table thead th {
+			color: white;
+		}
+	</style>
 </head>
 
 <body>
@@ -32,7 +47,7 @@
 		</div>
 
 
-		<table class="table table-striped" id="journalTable">
+		<table class="table table-striped custom-table" id="journalTable">
 			<thead>
 				<tr>
 					<th>Date</th>
@@ -50,17 +65,30 @@
 					<td th:text="${journal.note}"></td>
 					<td th:text="${journal.mood.name}"></td>
 
+
+					<td>
+						<a th:href="@{/edit(id=${journal.id})}" class="btn btn-xs btn-success">Edit</a>
+					</td>
+
 					<td sec:authorize="hasAuthority('ADMIN')">
 						<a th:href="@{/delete/{id}(id=${journal.id})}" class="btn btn-xs btn-danger">Delete</a>
-					</td>
-					<td>
-						<a th:href="@{/edit(id=${journal.id})}" class="btn btn-xs btn-danger">Edit</a>
 					</td>
 				</tr>
 			</tbody>
 		</table>
 		<a href="/add" class="btn btn-primary" sec:authorize="hasAuthority('ADMIN')">New Journal</a>
 	</div>
+
+	<script>
+		$(document).ready(function () {
+			$("#filter").on("input", function () {
+				var filterValue = $(this).val().toLowerCase();
+				$("#journalTable tbody tr").filter(function () {
+					$(this).toggle($(this).text().toLowerCase().indexOf(filterValue) > -1);
+				});
+			});
+		});
+	</script>
 
 
 </body>
