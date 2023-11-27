@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+
+<head>
+	<title>My Daily Journal</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<style>
+		body {
+			background-color: #f8f9fa;
+		}
+
+		.container {
+			margin-top: 10px;
+			margin-left: 5%;
+			margin-right: 5%;
+			background-color: rgb(255, 223, 239); 
+            padding: 30px; 
+		}
+
+
+		.btn-light-pink {
+			background-color: rgb(255, 170, 130);
+			border-color: #FFD6D6;
+			color: rgb(0, 0, 0);
+		}
+
+		.btn-blue {
+			background-color: rgb(128, 128, 255);
+			color: #ffffff;
+			font-size: 1.1em;
+			padding: 10px 20px;
+		}
+
+		.space {
+			height: 60px;
+		}
+
+		.center-text {
+			text-align: center;
+		}
+
+		.mb-section {
+			margin-bottom: 10px;
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.section-title {
+			font-size: 1.2em;
+		}
+
+		.date-section {
+			background-color: #ffcccb;
+		}
+
+		.content-section {
+			background-color: #add8e6;
+		}
+
+		.note-section {
+			background-color: #ffd700;
+		}
+
+		.mood-section {
+			background-color: rgb(255, 180, 104);
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row center-text">
+			<div class="col-md-6 mx-auto text-center mb-4">
+				<h1 class="display-4">All About Today ❤️✌️</h1>
+			</div>
+		</div>
+
+		<div>
+			<div th:if="${journal != null}" class="mb-4 mb-section date-section">
+				<div class="mb-2 section-title">
+					<strong>Date:</strong> <span th:text="${journal.date}"></span>
+				</div>
+			</div>
+
+			<div th:if="${journal != null}" class="mb-4 mb-section content-section">
+				<div class="mb-2 section-title">
+					<strong>Content:</strong> <span th:text="${journal.description}"></span>
+				</div>
+			</div>
+
+			<div th:if="${journal != null}" class="mb-4 mb-section note-section">
+				<div class="mb-2 section-title">
+					<strong>Note:</strong> <span th:text="${journal.note}"></span>
+				</div>
+			</div>
+
+			<div th:if="${journal != null}" class="mb-4 mb-section mood-section">
+				<div class="mb-2 section-title">
+					<strong>Mood:</strong> <span th:text="${journal.mood.name}"></span>
+				</div>
+			</div>
+
+
+
+			<div class="space"></div>
+
+			<form th:action="@{/diary}" method="get">
+				<button type="submit" class="btn btn-blue">Back to Journals</button>
+			</form>
+		</div>
+
+
+
+	</div>
+
+
+</body>
+
+</html>

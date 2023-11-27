@@ -33,7 +33,7 @@ public class JournalController {
 	@RequestMapping(value = { "/", "/diary" })
 	public String DiaryJournal(Model model) {
 		List<Journal> sortedJournals = repository.findAllByOrderByDateDesc();
-		//model.addAttribute("journals", repository.findAll());
+		// model.addAttribute("journals", repository.findAll());
 		model.addAttribute("journals", sortedJournals);
 
 		return "diary";
@@ -104,5 +104,17 @@ public class JournalController {
 		return "redirect:/diary";
 	}
 
+	@RequestMapping(value = "/myDay/{id}", method = RequestMethod.GET)
+	public String viewJournal(@PathVariable("id") Long journalId, Model model) {
+		Optional<Journal> journal = repository.findById(journalId);
+
+		if (journal.isPresent()) {
+			model.addAttribute("journal", journal.get());
+			return "myDay";
+		} else {
+			// Handle the case where the journal with the given ID doesn't exist
+			return "redirect:/diary";
+		}
+	}
 
 }

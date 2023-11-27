@@ -51,7 +51,6 @@
 			<thead>
 				<tr>
 					<th>Date</th>
-					<th>Content</th>
 					<th>Note</th>
 					<th>Mood</th>
 					<th sec:authorize="hasAuthority('ADMIN')"> </th>
@@ -61,9 +60,12 @@
 			<tbody>
 				<tr th:each="journal : ${journals}" class="journal-row">
 					<td th:text="${journal.date}"></td>
-					<td th:text="${journal.description}"></td>
 					<td th:text="${journal.note}"></td>
 					<td th:text="${journal.mood.name}"></td>
+
+					<td>
+						<a th:href="@{/myDay/{id}(id=${journal.id})}" class="btn btn-xs btn-info">View</a>
+					</td>
 
 
 					<td>
