@@ -91,7 +91,7 @@ public class JournalController {
 
 			return "editjournal";
 		} else {
-			// Handle the case where the book with the given ID doesn't exist
+			
 			return "redirect:/";
 		}
 	}
@@ -112,7 +112,7 @@ public class JournalController {
 			model.addAttribute("journal", journal.get());
 			return "myDay";
 		} else {
-			// Handle the case where the journal with the given ID doesn't exist
+			
 			return "redirect:/diary";
 		}
 	}
