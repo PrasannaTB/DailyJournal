@@ -47,8 +47,8 @@ public class DailyJournalApplication {
 			AppUser user2 = new AppUser("admin", "$2a$10$FMVXp4WgAdUyS.2P2DdK/OYSRUvvK5CucWKCdAdfO5XxLu6pH7VCK",
 					"ADMIN");
 
-			urepository.save(user1);
-			urepository.save(user2);
+			//urepository.save(user1);
+			//urepository.save(user2);
 
 			log.info("fetch all journals");
 			for (Journal journal : repository.findAll()) {
